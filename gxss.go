@@ -13,6 +13,8 @@ import (
 	"regexp"
 	"sync"
 	"time"
+
+	"github.com/briandowns/spinner"
 )
 
 var transport = &http.Transport{
@@ -32,22 +34,38 @@ func main() {
 
 	var c int
 	var p string
+	var v bool
 	flag.IntVar(&c, "c", 50, "Set the Concurrency (Default 50)")
-	flag.StringVar(&p, "p", "gxss", "Payload you want to Send to Check Refelection")
+	flag.StringVar(&p, "p", "", "Payload you want to Send to Check Refelection")
+	flag.BoolVar(&v, "v", false, "Verbose mode")
 	flag.Parse()
 
-	var wg sync.WaitGroup
-	for i := 0; i < c; i++ {
-		wg.Add(1)
-		go func() {
-			testxss(p)
-			wg.Done()
-		}()
-		wg.Wait()
+	if p != "" {
+
+		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond) // Build our new spinner
+		s.Suffix = " Testing XSS "
+		s.Start() // Start the spinner
+		time.Sleep(5 * time.Second)
+		if v == true {
+			s.Stop()
+		}
+
+		var wg sync.WaitGroup
+		for i := 0; i < c; i++ {
+			wg.Add(1)
+			go func() {
+				testxss(p, v)
+				wg.Done()
+			}()
+			wg.Wait()
+		}
+
+	} else {
+		flag.PrintDefaults()
 	}
 }
 
-func testxss(p string) {
+func testxss(p string, v bool) {
 
 	httpClient.CheckRedirect = func(req *http.Request, via []*http.Request) error {
 		return http.ErrUseLastResponse
@@ -56,9 +74,20 @@ func testxss(p string) {
 	time.Sleep(500 * time.Microsecond)
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
+
 		link := scanner.Text()
 		u, _ := url.Parse(link)
-
+		if v == true {
+			fmt.Println(`                       
+ _____ __ __ _____ _____ 
+|   __|  |  |   __|   __|
+|  |  |-   -|__   |__   |
+|_____|__|__|_____|_____|
+                         
+	v0.1 - @KathanP19
+	`)
+			fmt.Println("[+] Testing URL : " + link)
+		}
 		q, _ := url.ParseQuery(u.RawQuery)
 		for key, value := range q {
 			var tm string = value[0]
