@@ -40,6 +40,17 @@ func main() {
 	flag.BoolVar(&v, "v", false, "Verbose mode")
 	flag.Parse()
 
+	if v == true {
+		fmt.Println(`                  
+ _____ __ __ _____ _____ 
+|   __|  |  |   __|   __|
+|  |  |-   -|__   |__   |
+|_____|__|__|_____|_____|
+                         
+	0.1 - @KathanP19
+	`)
+	}
+
 	if p != "" {
 
 		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond) // Build our new spinner
@@ -78,14 +89,6 @@ func testxss(p string, v bool) {
 		link := scanner.Text()
 		u, _ := url.Parse(link)
 		if v == true {
-			fmt.Println(`                       
- _____ __ __ _____ _____ 
-|   __|  |  |   __|   __|
-|  |  |-   -|__   |__   |
-|_____|__|__|_____|_____|
-                         
-	v0.1 - @KathanP19
-	`)
 			fmt.Println("[+] Testing URL : " + link)
 		}
 		q, _ := url.ParseQuery(u.RawQuery)
