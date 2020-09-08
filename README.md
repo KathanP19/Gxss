@@ -31,6 +31,10 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 
     `cat urls.txt | Gxss -c 100 -p XssReflected`
 
+# How It Works
+1. It takes Urls from STDIN
+2. It check for the reflected value on params one by one. (There are some tool like qsreplace which replace all params value but gxss checks payload one by one which makes it different from all those tools.)
+3. If reflection for any param is found it tells which param reflected in response.
 # Use Case
 
 `echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | grep "URL" | cut -d '"' -f2 | sort -u | dalfox pipe` 
