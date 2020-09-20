@@ -91,7 +91,11 @@ func testxss(p string, v bool) {
 		if v == true {
 			fmt.Println("[+] Testing URL : " + link)
 		}
-		q, _ := url.ParseQuery(u.RawQuery)
+		 q, err := url.ParseQuery(u.RawQuery)
+       		 if err != nil {
+            		fmt.Println(err)
+            		return
+        	}
 		for key, value := range q {
 			var tm string = value[0]
 			q.Set(key, p)
