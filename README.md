@@ -34,6 +34,16 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 # How It Works
 1. It takes Urls from STDIN
 2. It check for the reflected value on params one by one. (There are some tool like qsreplace which replace all params value but gxss checks payload one by one which makes it different from all those tools.)
+```
+For Example- 
+Url is https://example.com/?p=first&q=second
+
+First it will check if p param reflects
+https://example.com/?p=Gxss&q=second
+
+Then it will check if q param reflects
+https://example.com/?p=first&q=Gxss
+```
 3. If reflection for any param is found it tells which param reflected in response.
 # Use Case
 
