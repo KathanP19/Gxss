@@ -41,6 +41,11 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 
 * [Dalfox](https://github.com/hahwul/dalfox) is Xss Scanner by [@hahwul](https://twitter.com/hahwul)
 
+# TODO
+
+- [ ] Add an option for user to add there own headers
+- [ ] Add an option for User-Agent
+
 # Thanks To
 
 * [Zoid](https://twitter.com/z0idsec) for helping me out with code.
