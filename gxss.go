@@ -87,15 +87,18 @@ func testxss(p string, v bool) {
 	for scanner.Scan() {
 
 		link := scanner.Text()
-		u, _ := url.Parse(link)
+		ue := url.QueryEscape(link)
+		u, err := url.Parse(ue)
+		if err != nil {
+			panic(err)
+		}
 		if v == true {
 			fmt.Println("[+] Testing URL : " + link)
 		}
-		 q, err := url.ParseQuery(u.RawQuery)
-       		 if err != nil {
-            		fmt.Println(err)
-            		return
-        	}
+		q, err := url.ParseQuery(u.RawQuery)
+		if err != nil {
+			panic(err)
+		}
 		for key, value := range q {
 			var tm string = value[0]
 			q.Set(key, p)
