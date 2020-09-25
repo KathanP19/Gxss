@@ -87,8 +87,8 @@ func testxss(p string, v bool) {
 	for scanner.Scan() {
 
 		link := scanner.Text()
-		ue := url.QueryEscape(link)
-		u, err := url.Parse(ue)
+		//ue := url.QueryEscape(link)
+		u, err := url.Parse(link)
 		if err != nil {
 			panic(err)
 		}
