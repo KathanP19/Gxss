@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -35,9 +36,11 @@ func main() {
 	var c int
 	var p string
 	var v bool
+	var o bool
 	flag.IntVar(&c, "c", 50, "Set the Concurrency (Default 50)")
 	flag.StringVar(&p, "p", "", "Payload you want to Send to Check Refelection")
 	flag.BoolVar(&v, "v", false, "Verbose mode")
+	flag.BoolVar(&o, "o", false, "Output Result File")
 	flag.Parse()
 
 	if v == true {
@@ -60,12 +63,20 @@ func main() {
 		if v == true {
 			s.Stop()
 		}
+		if o == true {
+			emptyFile, err := os.Create("result.txt")
+			if err != nil {
+				log.Fatal(err)
+			}
+			log.Println(emptyFile)
+			emptyFile.Close()
+		}
 
 		var wg sync.WaitGroup
 		for i := 0; i < c; i++ {
 			wg.Add(1)
 			go func() {
-				testxss(p, v)
+				testxss(p, v, o)
 				wg.Done()
 			}()
 			wg.Wait()
@@ -76,7 +87,7 @@ func main() {
 	}
 }
 
-func testxss(p string, v bool) {
+func testxss(p string, v bool, o bool) {
 
 	httpClient.CheckRedirect = func(req *http.Request, via []*http.Request) error {
 		return http.ErrUseLastResponse
@@ -109,7 +120,7 @@ func testxss(p string, v bool) {
 			}
 
 			req.Header.Add("User-Agent", "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.100 Safari/537.36")
-			
+
 			resp, err := httpClient.Do(req)
 			if err != nil {
 				return
@@ -126,6 +137,16 @@ func testxss(p string, v bool) {
 			if match != nil {
 				fmt.Printf("URL: %q\n", u)
 				fmt.Printf("Reflected Param : %q\n", key)
+				if o == true {
+					f, err := os.OpenFile("result.txt", os.O_APPEND|os.O_WRONLY, 0644)
+					if err != nil {
+						log.Println(err)
+					}
+					if _, err := f.WriteString(u.String() + "\n"); err != nil {
+						log.Fatal(err)
+					}
+					f.Close()
+				}
 			}
 			q.Set(key, tm)
 		}
