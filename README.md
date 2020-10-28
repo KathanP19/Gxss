@@ -40,6 +40,10 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 
     `cat urls.txt | Gxss -c 100 -o Result.txt`
 
+* For verbose mode
+
+    `cat urls.txt | Gxss -c 100 -o Result.txt -v `
+
 
 # How It Works
 1. It takes Urls from STDIN
@@ -55,7 +59,10 @@ Then it will check if q param reflects
 https://example.com/?p=first&q=Gxss
 ```
 3. If reflection for any param is found it tells which param reflected in response.
-# Use Case
+
+[![asciicast](https://asciinema.org/a/84mXOOcDrxzZ3eyW16Ap3eHwX.svg)](https://asciinema.org/a/84mXOOcDrxzZ3eyW16Ap3eHwX)
+
+# Use Case or How to add to your workflow
 
 `echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | sort -u | dalfox pipe` 
 
