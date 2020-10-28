@@ -1,4 +1,5 @@
-# Gxss
+# Gxss v2.0
+
 A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kxss](https://github.com/tomnomnom/hacks/tree/master/kxss) by [@tomnomnom](https://twitter.com/TomNomNom).
 
 # Installation
@@ -14,22 +15,31 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 |  |  |-   -|__   |__   |
 |_____|__|__|_____|_____|
                          
-        0.1 - @KathanP19
+        2.0 - @KathanP19
 
+  Usage of ./Gxss:
   -c int
-        Set the Concurrency  (default 50)
+        Set the Concurrency (default 50)
+  -o string
+        Save Result to OuputFile
   -p string
-        Payload you want to Send to Check Refelection
+        Payload you want to Send to Check Refelection (default "Gxss")
   -v    Verbose mode
+
 ```
 
 * Checking Single Url
 
-    `echo "https://target.com/some.php?first=hello&last=world | Gxss -c 100 -p Payload`
+    `echo "https://target.com/some.php?first=hello&last=world | Gxss -c 100 `
     
 * Checking List of Urls
 
     `cat urls.txt | Gxss -c 100 -p XssReflected`
+
+* Save Urls Which have Reflecting Params in a file for further analysis
+
+    `cat urls.txt | Gxss -c 100 -o Result.txt`
+
 
 # How It Works
 1. It takes Urls from STDIN
@@ -47,7 +57,7 @@ https://example.com/?p=first&q=Gxss
 3. If reflection for any param is found it tells which param reflected in response.
 # Use Case
 
-`echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | grep "URL" | cut -d '"' -f2 | sort -u | dalfox pipe` 
+`echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | sort -u | dalfox pipe` 
 
 * [Dalfox](https://github.com/hahwul/dalfox) is Xss Scanner by [@hahwul](https://twitter.com/hahwul)
 
