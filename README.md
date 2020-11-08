@@ -64,7 +64,7 @@ https://example.com/?p=first&q=Gxss
 
 # Use Case or How to add to your workflow
 
-`echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss -o result_gxss; cat result_gxss | sort -u | dalfox pipe ; rm result_gxss` 
+`echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | sort -u | dalfox pipe ; rm result_gxss` 
 
 * [Dalfox](https://github.com/hahwul/dalfox) is Xss Scanner by [@hahwul](https://twitter.com/hahwul)
 
