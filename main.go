@@ -1,7 +1,7 @@
 package main
 
 import (
-    "bufio"
+	"bufio"
 	"crypto/tls"
 	"flag"
 	"fmt"
@@ -127,7 +127,7 @@ func checkreflection(link string) {
 				fmt.Printf("Url : %q\n", u)
 				fmt.Printf("Reflected Param : %q\n", key)
 			} else {
-				fmt.Printf(u.String() + "\n")
+				fmt.Fprint(os.Stderr, u.String()+"\n")
 			}
 			if outputFile != "" {
 				f, err := os.OpenFile(outputFile, os.O_APPEND|os.O_WRONLY, 0644)
