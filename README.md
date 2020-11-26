@@ -21,9 +21,9 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
   -c int
         Set the Concurrency (default 50)
   -o string
-        Save Result to OuputFile
+        Save Result to OutputFile
   -p string
-        Payload you want to Send to Check Refelection (default "Gxss")
+        Payload you want to Send to Check Reflection (default "Gxss")
   -v    Verbose mode
 
 ```
