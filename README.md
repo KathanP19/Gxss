@@ -6,6 +6,9 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 
 `go get -u github.com/KathanP19/Gxss`
 
+* If the above step doesn't work then you can try pre-built binary file from here
+  https://github.com/KathanP19/Gxss/releases
+
 # Usage
 
 ```
