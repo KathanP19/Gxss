@@ -5,23 +5,39 @@ import (
 	"crypto/tls"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"net/http/httputil"
 	"net/url"
 	"os"
 	"regexp"
+	"strings"
 	"sync"
 	"time"
-
-	"github.com/parnurzeal/gorequest"
 )
 
 var (
-	concurrency int
-	verbose     bool
-	outputFile  string
-	payload     string
+	concurrency   int
+	verbose       bool
+	outputFile    string
+	payload       string
+	useragent     string
+	customHeaders string
 )
+
+type customh []string
+
+func (m *customh) String() string {
+	return "This is custom flag for getting custom headers."
+}
+
+func (m *customh) Set(value string) error {
+	*m = append(*m, value)
+	return nil
+}
+
+var custhead customh
 
 func banner() {
 	fmt.Println(`                  
@@ -39,6 +55,9 @@ func main() {
 	flag.BoolVar(&verbose, "v", false, "Verbose mode")
 	flag.StringVar(&payload, "p", "Gxss", "Payload you want to Send to Check Refelection")
 	flag.StringVar(&outputFile, "o", "", "Save Result to OuputFile")
+	flag.StringVar(&useragent, "u", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge    cko) Chrome/86.0.4240.111 Safari/537.36", "Set Custom User agent.Default is Mozilla")
+	flag.Var(&custhead, "h", "")
+
 	flag.Parse()
 
 	if verbose == true {
@@ -144,12 +163,40 @@ func checkreflection(link string) {
 	}
 }
 
-func requestfunc(u string) (resp gorequest.Response, body string, errs []error) {
+//removed gorequest for more granular access to setting headers.
 
-	resp, body, errs = gorequest.New().Get(u).TLSClientConfig(&tls.Config{InsecureSkipVerify: true}).
-		RedirectPolicy(func(req gorequest.Request, via []gorequest.Request) error { return http.ErrUseLastResponse }).
-		Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36").
-		End()
+func requestfunc(u string) (resp *http.Response, body string, errs []error) {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	client := &http.Client{
+		CheckRedirect: redirectPolicyFunc,
+	}
 
-	return resp, body, errs
+	req, err := http.NewRequest("GET", u, nil)
+	req.Header.Add("User-Agent", useragent)
+
+	//splitting headers and values by using : as separator
+	for _, v := range custhead {
+		s := strings.SplitN(v, ":", 2)
+		req.Header.Add(s[0], s[1])
+	}
+
+	//Converting request dump to string for verbose mode
+	requestDump, err := httputil.DumpRequest(req, true)
+	if err != nil {
+		fmt.Println(err)
+	}
+	if verbose == true {
+		fmt.Println(string(requestDump))
+	}
+	resp, err = client.Do(req)
+	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	bodyString := string(bodyBytes)
+	return resp, bodyString, errs
+}
+
+func redirectPolicyFunc(req *http.Request, via []*http.Request) error {
+	return http.ErrUseLastResponse
 }
