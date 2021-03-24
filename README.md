@@ -15,16 +15,21 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 |  |  |-   -|__   |__   |
 |_____|__|__|_____|_____|
                          
-        2.0 - @KathanP19
+        3.0 - @KathanP19
 
-  Usage of ./Gxss:
+Usage of Gxss:
   -c int
         Set the Concurrency (default 50)
+  -h value
+    
   -o string
-        Save Result to OuputFile
+        Save Result to OutputFile
   -p string
-        Payload you want to Send to Check Refelection (default "Gxss")
+        Payload you want to Send to Check Reflection (default "Gxss")
+  -u string
+        Set Custom User agent.Default is Mozilla (default "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36")
   -v    Verbose mode
+
 
 ```
 
