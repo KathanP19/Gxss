@@ -44,9 +44,17 @@ Usage of Gxss:
 
     `cat urls.txt | Gxss -c 100 -o Result.txt`
 
-* For verbose mode
+* For verbose mode `-v`
 
     `cat urls.txt | Gxss -c 100 -o Result.txt -v `
+    
+* Send Custom Header `-h`
+    
+    `cat urls.txt | Gxss -c 100 -p Xss -h "Cookie: Value"`
+    
+* Send Custom User-Agent `-u`
+    
+    `cat urls.txt | Gxss -c 100 -p Xss -h "Cookie: Value" -u "Google Bot"`
 
 
 # How It Works
