@@ -82,8 +82,10 @@ https://example.com/?p=first&q=Gxss
 
 # TODO
 
-- [ ] Add an option for user to add there own headers
-- [ ] Add an option for User-Agent
+- [ ] Add Post Method Support.
+- [ ] Add Proxy Support.
+- [x] Add an option for user to add there own headers
+- [x] Add an option for User-Agent
 
 # Thanks To
 
