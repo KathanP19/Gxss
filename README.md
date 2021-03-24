@@ -21,15 +21,14 @@ Usage of Gxss:
   -c int
         Set the Concurrency (default 50)
   -h value
-    
+        Set Custom Header.
   -o string
         Save Result to OutputFile
   -p string
         Payload you want to Send to Check Reflection (default "Gxss")
   -u string
-        Set Custom User agent.Default is Mozilla (default "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36")
+        Set Custom User agent. Default is Mozilla (default "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36")
   -v    Verbose mode
-
 
 ```
 
