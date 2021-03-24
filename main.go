@@ -46,15 +46,15 @@ func banner() {
 |  |  |-   -|__   |__   |
 |_____|__|__|_____|_____|
                          
-	2.0 - @KathanP19
+	3.0 - @KathanP19
 	`)
 }
 
 func main() {
 	flag.IntVar(&concurrency, "c", 50, "Set the Concurrency")
 	flag.BoolVar(&verbose, "v", false, "Verbose mode")
-	flag.StringVar(&payload, "p", "Gxss", "Payload you want to Send to Check Refelection")
-	flag.StringVar(&outputFile, "o", "", "Save Result to OuputFile")
+	flag.StringVar(&payload, "p", "Gxss", "Payload you want to Send to Check Reflection")
+	flag.StringVar(&outputFile, "o", "", "Save Result to OutputFile")
 	flag.StringVar(&useragent, "u", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge    cko) Chrome/86.0.4240.111 Safari/537.36", "Set Custom User agent.Default is Mozilla")
 	flag.Var(&custhead, "h", "")
 
