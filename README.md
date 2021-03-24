@@ -90,6 +90,7 @@ https://example.com/?p=first&q=Gxss
 # Thanks To
 
 * [Zoid](https://twitter.com/z0idsec) for helping me out with code.
+* [Parth Parmar](https://twitter.com/Parth97531) for adding Custom Header and User-Agent Support.
 
 # To Support Me 
 
