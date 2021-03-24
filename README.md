@@ -1,4 +1,4 @@
-# Gxss v2.2
+# Gxss v3.0
 
 A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kxss](https://github.com/tomnomnom/hacks/tree/master/kxss) by [@tomnomnom](https://twitter.com/TomNomNom).
 
