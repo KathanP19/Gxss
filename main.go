@@ -189,6 +189,9 @@ func requestfunc(u string) (resp *http.Response, body string, errs []error) {
 		fmt.Println(string(requestDump))
 	}
 	resp, err = client.Do(req)
+	if err != nil {
+		return
+	}
 	bodyBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
