@@ -24,6 +24,7 @@ var (
 	payload       string
 	useragent     string
 	customHeaders string
+	proxy         string
 )
 
 type customh []string
@@ -55,6 +56,7 @@ func main() {
 	flag.BoolVar(&verbose, "v", false, "Verbose mode")
 	flag.StringVar(&payload, "p", "Gxss", "Payload you want to Send to Check Reflection")
 	flag.StringVar(&outputFile, "o", "", "Save Result to OutputFile")
+	flag.StringVar(&proxy, "x", "", "Proxy URL. For example: http://127.0.0.1:8080")
 	flag.StringVar(&useragent, "u", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36", "Set Custom User agent. Default is Mozilla")
 	flag.Var(&custhead, "h", "Set Custom Header.")
 
@@ -167,6 +169,15 @@ func checkreflection(link string) {
 
 func requestfunc(u string) (resp *http.Response, body string, errs []error) {
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+
+	if proxy != "" {
+		proxyUrl, err := url.Parse(proxy)
+		http.DefaultTransport = &http.Transport{Proxy: http.ProxyURL(proxyUrl)}
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
 	client := &http.Client{
 		CheckRedirect: redirectPolicyFunc,
 	}
