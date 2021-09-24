@@ -19,15 +19,14 @@ import (
 )
 
 var (
-	concurrency   int
-	verbose       bool
-	outputFile    string
-	payload       string
-	useragent     string
-	customHeaders string
-	proxy         string
-	requestData   string
-	method        string
+	concurrency int
+	verbose     bool
+	outputFile  string
+	payload     string
+	useragent   string
+	proxy       string
+	requestData string
+	method      string
 )
 
 type customh []string
@@ -66,7 +65,7 @@ func main() {
 
 	flag.Parse()
 
-	if verbose == true {
+	if verbose {
 		banner()
 	}
 
@@ -105,7 +104,7 @@ func main() {
 	} else {
 		flag.PrintDefaults()
 	}
-	if verbose == true {
+	if verbose {
 		fmt.Println("\nFinished Checking, Thank you for using Gxss.")
 	}
 }
@@ -132,7 +131,7 @@ func checkreflection(link string) {
 		u = v
 	}
 
-	if verbose == true {
+	if verbose {
 		fmt.Println("[+] Testing URL : " + link)
 	}
 	q, err := url.ParseQuery(u.RawQuery)
@@ -145,6 +144,10 @@ func checkreflection(link string) {
 		q, err = url.ParseQuery(requestData)
 	} else {
 		method = "GET"
+	}
+
+	if err != nil {
+		fmt.Println(err)
 	}
 
 	for key, value := range q {
@@ -162,7 +165,7 @@ func checkreflection(link string) {
 		match := re.FindStringSubmatch(body)
 
 		if match != nil {
-			if verbose == true {
+			if verbose {
 				fmt.Printf("Url : %q\n", u)
 				fmt.Printf("Reflected Param : %q\n", key)
 			} else {
@@ -203,6 +206,10 @@ func requestfunc(u string, requestData string, method string) (resp *http.Respon
 	req, err := http.NewRequest(method, u, bytes.NewBufferString(requestData))
 	req.Header.Add("User-Agent", useragent)
 
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	if method == "POST" {
 		req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	}
@@ -217,7 +224,7 @@ func requestfunc(u string, requestData string, method string) (resp *http.Respon
 	if err != nil {
 		fmt.Println(err)
 	}
-	if verbose == true {
+	if verbose {
 		fmt.Println(string(requestDump))
 	}
 	resp, err = client.Do(req)
