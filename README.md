@@ -1,10 +1,10 @@
-# Gxss v3.0
+# Gxss v4.0
 
 A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kxss](https://github.com/tomnomnom/hacks/tree/master/kxss) by [@tomnomnom](https://twitter.com/TomNomNom).
 
 # Installation
 
-`go get -u github.com/KathanP19/Gxss`
+`go install github.com/KathanP19/Gxss@latest`
 
 * If the above step doesn't work then you can try pre-built binary file from here
   https://github.com/KathanP19/Gxss/releases
@@ -18,11 +18,13 @@ A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kx
 |  |  |-   -|__   |__   |
 |_____|__|__|_____|_____|
                          
-        3.0 - @KathanP19
+        4.0 - @KathanP19
 
 Usage of Gxss:
   -c int
         Set the Concurrency (default 50)
+  -d string
+        Request data for POST based reflection testing
   -h value
         Set Custom Header.
   -o string
@@ -32,7 +34,8 @@ Usage of Gxss:
   -u string
         Set Custom User agent. Default is Mozilla (default "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36")
   -v    Verbose mode
-
+  -x string
+        Proxy URL. Example: http://127.0.0.1:8080
 ```
 
 * Checking Single Url
