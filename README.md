@@ -88,6 +88,7 @@ https://example.com/?p=first&q=Gxss
 
 # TODO
 
+- [ ] TimeOut Option. 
 - [x] Add Post Method Support.
 - [x] Add Proxy Support.
 - [x] Add an option for user to add there own headers
