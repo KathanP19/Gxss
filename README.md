@@ -85,7 +85,7 @@ https://example.com/?p=first&q=Gxss
 
 # TODO
 
-- [ ] Add Post Method Support.
+- [x] Add Post Method Support.
 - [x] Add Proxy Support.
 - [x] Add an option for user to add there own headers
 - [x] Add an option for User-Agent
@@ -94,6 +94,7 @@ https://example.com/?p=first&q=Gxss
 
 * [Zoid](https://twitter.com/z0idsec) for helping me out with code.
 * [Parth Parmar](https://twitter.com/Parth97531) for adding Custom Header and User-Agent Support.
+* [Luska](https://github.com/LuskaBol) for adding proxy support and custom post data support
 
 # To Support Me 
 
