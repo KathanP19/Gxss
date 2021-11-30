@@ -76,7 +76,7 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			log.Println(emptyFile)
+			log.Println("Created " + outputFile)
 			emptyFile.Close()
 
 			var wg sync.WaitGroup
@@ -126,7 +126,7 @@ func checkreflection(link string) {
 		decoded := url.QueryEscape(link)
 		v, err := url.Parse(decoded)
 		if err != nil {
-			fmt.Printf("Error is %e", err)
+			fmt.Printf("Error is %s\n", err.Error())
 		}
 		u = v
 	}
@@ -136,7 +136,7 @@ func checkreflection(link string) {
 	}
 	q, err := url.ParseQuery(u.RawQuery)
 	if err != nil {
-		fmt.Printf("Error is %e", err)
+		fmt.Printf("Error is %s\n", err.Error())
 	}
 
 	if requestData != "" {
