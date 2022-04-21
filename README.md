@@ -40,7 +40,7 @@ Usage of Gxss:
 
 * Checking Single Url
 
-    `echo "https://target.com/some.php?first=hello&last=world | Gxss -c 100 `
+    `echo "https://target.com/some.php?first=hello&last=world" | Gxss -c 100 `
     
 * Checking List of Urls
 
