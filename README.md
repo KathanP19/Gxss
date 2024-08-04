@@ -1,3 +1,5 @@
+# Project is now Deprecated as Dalfox has discovery option which can be used to identify reflecting params `dalfox file urls.txt --skip-xss-scanning -o reflecting.txt`
+
 # Gxss v4.0
 
 A Light Weight Tool for checking reflecting Parameters in a URL. Inspired by [kxss](https://github.com/tomnomnom/hacks/tree/master/kxss) by [@tomnomnom](https://twitter.com/TomNomNom).
